@@ -90,7 +90,9 @@ class Ticket(models.Model):
 
     def clean(self):
         if not self.movie_session or not self.movie_session.cinema_hall:
-            raise ValidationError("movie_session and its cinema_hall must be set")
+            raise ValidationError(
+                "movie_session and its cinema_hall must be set"
+            )
 
         for ticket_attr_value, ticket_attr_name, cinema_hall_attr_name in [
             (self.row, "row", "rows"),

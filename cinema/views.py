@@ -102,7 +102,9 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(movie__id__in=movie)
 
         if self.action == "list":
-            queryset = queryset.select_related("movie", "cinema_hall").annotate(
+            queryset = queryset.select_related(
+                "movie", "cinema_hall"
+            ).annotate(
                 tickets_available=(
                     F("cinema_hall__rows"
                       ) * F("cinema_hall__seats_in_row")) - Count("tickets")
